@@ -139,6 +139,10 @@ while comp_score < game_goal and user_score < game_goal:
 
 
 # end of entire game, output final results
+
+
+make_statement( "Game Over", "🏁")
+
 print()
 if user_score > comp_score:
     print("The user won")      # replace this with statement generator call
