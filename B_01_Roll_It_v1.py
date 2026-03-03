@@ -13,14 +13,32 @@ def yes_no(question):
             print("Please answer yes or no.")
 
 
+
+
 def instructions():
     """Display program instructions."""
     print()
     print("**** Instructions ****")
-    print("This program demonstrates how to use functions.")
-    print("You will be asked if you want to see the instructions.")
-    print("Answer with yes or no.")
+    print("Roll the dice and try to win!.")
     print()
+
+def int_check():
+    """Checks users enter an integer more than /  equal to 13"""
+
+    error = "Please enter an integer more than /  equal to 13. "
+    while True:
+        try:
+             response = int(input("What is the game goal? "))
+
+
+             if response < 13:
+               print(error)
+             else:
+                 return response
+
+
+        except ValueError:
+              print(error)
 
 
 # Main routine
@@ -32,18 +50,8 @@ want_instructions = yes_no("Do you want to see the instructions? ")
 if want_instructions == "yes":
     instructions()
 
-print()
-print("Program continues")
 
-# ask the user if they want instructions (check they say yes / no)
-want_instructions = yes_no("Do you want to see the instructions? ")
-
-# Display the instructions if the user wants to see them...
-if want_instructions == "yes":
-    instructions()
 
 print()
-print("Program continues")
-
 game_goal =int_check()
 print (game_goal)

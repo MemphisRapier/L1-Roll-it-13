@@ -15,6 +15,24 @@ def yes_no(question):
         else:
             print("please enter yes / no")
 
+def int_check():
+    """Checks users enter an integer more than /  equal to 13"""
+
+    error = "Please enter an integer more than /  equal to 13. "
+    while True:
+        try:
+             response = int(input("What is the game goal? "))
+
+
+             if response < 13:
+               print(error)
+             else:
+                 return response
+
+
+        except ValueError:
+              print(error)
+
 
 # Main routine
 
