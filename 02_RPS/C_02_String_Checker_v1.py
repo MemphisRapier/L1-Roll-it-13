@@ -1,4 +1,4 @@
-def string_checker(question, valid_ans):
+def string_checker(question, valid_ans=["yes", "no"]):
     """Checks users enter a valid answer based on a list.
     Accepts first letter or full word"""
 
@@ -27,10 +27,10 @@ def string_checker(question, valid_ans):
 # Main Routine
 
 # Valid answers for string checker
-yes_no = ("yes", "no")
+
 rps_valid_ans = ("rock", "paper", "scissors", "xxx")
 
-want_instructions = string_checker("Do you want to see the instructions?",
-                                   yes_no)
+want_instructions = string_checker("Do you want to see the instructions?")
 
-print("You chose: ")
+user_choice = string_checker("Choose:", rps_valid_ans)
+print("You chose: ", user_choice)
