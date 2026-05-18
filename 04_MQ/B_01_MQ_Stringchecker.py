@@ -21,8 +21,8 @@ def check_answer(num1, num2, question):
     symbols = {
         "addition": "+",
         "subtraction": "-",
-        "multiplication": "*",
-        "division": "/"
+        "multiplication": "×",
+        "division": "÷"
     }
 
     # Work out correct answer
@@ -53,14 +53,14 @@ def check_answer(num1, num2, question):
 
 # Main program
 
-valid_operations = ("addition", "subtraction", "multiplication", "division")
+valid_function = ("Addition", "Subtraction", "Multiplication", "Division")
 
 num1 = 10
 num2 = 5
 
 function = string_checker(
     "Choose: Addition (a), Subtraction (s), Multiplication (m), Division (d): ",
-    valid_operations
+    valid_function
 )
 
 check_answer(num1, num2, function)

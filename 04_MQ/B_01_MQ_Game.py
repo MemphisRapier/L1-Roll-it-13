@@ -53,6 +53,8 @@ def string_checker(question, valid_ans):
         print()
 
 
+# Main Routine
+
 def check_answer(num1, num2, question):
     """Asks math question and checks answer"""
 
@@ -102,4 +104,3 @@ function = string_checker(
 )
 
 check_answer(num1, num2, function)
-
