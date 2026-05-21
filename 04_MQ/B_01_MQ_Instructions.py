@@ -7,7 +7,6 @@ def yes_no(question):
 
     while True:
 
-        want_instructions = input(question).lower()
 
         if want_instructions == "yes" or want_instructions == "y":
             return "yes"
@@ -41,6 +40,4 @@ want_instructions = yes_no("Do you want to read the instructions? ")
 # checks users enter yes (y) or no (n)
 if  want_instructions == "yes":
          instructions()
-
-print("program continues")
 

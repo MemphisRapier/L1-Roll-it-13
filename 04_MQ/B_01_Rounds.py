@@ -37,7 +37,7 @@ def ask_question():
 
     user_input = input(f"What is {a} + {b}? ")
 
-    # Exit code
+    # exit code if user chickens out
     if user_input.lower() == "xxx":
         return "exit"
 
