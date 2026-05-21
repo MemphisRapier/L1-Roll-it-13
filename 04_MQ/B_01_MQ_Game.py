@@ -1,106 +1,284 @@
-# checks if users enter yes (y) or no (n)
+import random
+
+
+# Checks if user enters yes or no
 def yes_no(question):
-    while True:
-
-        want_instructions = input(question).lower()
-
-        if want_instructions == "yes" or want_instructions == "y":
-            return "yes"
-        elif want_instructions == "no" or want_instructions == "n":
-            return "no"
-        else:
-            print("please enter yes / no")
-
-
-def instructions():
-    print(''' 
-
-    There will math questions displayed on this quiz
-    all on basic facts. 
-
-    These could be simple basic facts like: Multiplication,
-    Division, Addition, Subtraction.
-
-     Take in mind that none of these questions will have
-      a negative number so don't worry 🙂🙂 ''')
-
-
-# Main Routine Starts here
-
-print()
-print("✖️Welcome to my Math Quiz➗ ")
-print()
-
-want_instructions = yes_no("Do you want to read the instructions? ")
-
-# checks users enter yes (y) or no (n)
-if want_instructions == "yes":
-    instructions()
-
-def string_checker(question, valid_ans):
-    """Checks user enters a valid answer (full word or first letter)"""
-
-    error = f"Please choose from {valid_ans}"
 
     while True:
+
         response = input(question).lower()
 
-        for item in valid_ans:
-            if response == item or response == item[0]:
-                return item
+        if response in ["yes", "y"]:
+            return "yes"
 
-        print(error)
-        print()
+        elif response in ["no", "n"]:
+            return "no"
+
+        else:
+            print("Please enter yes / no\n")
+
+
+# Instructions that will display if user wants it
+def instructions():
+
+    print('''
+
+📘 Instructions 📘
+
+There will be maths questions displayed in this quiz
+based on basic maths facts.
+
+The questions may include:
+➕ Addition
+➖ Subtraction
+✖ Multiplication
+➗ Division
+
+None of the questions will contain negative numbers,
+so don't worry 🙂🙂
+
+Type 'xxx' anytime to quit the game.
+
+Good luck!
+''')
+
+
+# Check how many rounds
+def int_check(question):
+
+    error = "Please enter an integer that is 1 or more."
+
+    while True:
+
+        response = input(question)
+
+        if response == "":
+            return "infinite"
+
+        if response.lower() == "xxx":
+            return "exit"
+
+        try:
+            response = int(response)
+
+            if response < 1:
+                print(error)
+
+            else:
+                return response
+
+        except ValueError:
+            print(error)
+
+
+# Type of questions that user want to display on quiz
+def choose_question():
+
+    print("\n🔴🔴Choose the type of questions you want to be quizzed on🔴🔴:")
+    print("A) Addition")
+    print("S) Subtraction")
+    print("M) Multiplication")
+    print("D) Division")
+
+    while True:
+
+        choice = input(
+            "\nChoose: "
+        ).lower()
+
+        # Addition
+        if choice in ["addition", "a"]:
+            return "+"
+
+        # Subtraction
+        elif choice in ["subtraction", "s"]:
+            return "-"
+
+        # Multiplication
+        elif choice in ["multiplication", "m"]:
+            return "×"
+
+        # Division
+        elif choice in ["division", "d"]:
+            return "÷"
+
+        else:
+            print(
+                "Please enter A, S, M, D "
+                "or the full word."
+            )
+
+
+# Asks maths question
+def ask_question(function):
+
+    a = random.randint(1, 20)
+    b = random.randint(1, 20)
+
+    # Addition
+    if function == "+":
+        answer = a + b
+
+    # Subtraction (no negatives)
+    elif function == "-":
+
+        if a < b:
+            a, b = b, a
+
+        answer = a - b
+
+    # Multiplication
+    elif function == "×":
+        answer = a * b
+
+    # Division
+    else:
+
+        b = random.randint(1, 10)
+        answer = random.randint(1, 10)
+        a = answer * b
+
+    # Ask question
+    user_input = input(f"What is {a} {function} {b}? ")
+
+    # Exit code
+    if user_input.lower() == "xxx":
+        return "exit", 0, "Exited game"
+
+    try:
+
+        user_answer = int(user_input)
+
+        if user_answer == answer:
+
+            feedback = "✅ Correct!"
+            print(feedback)
+
+            return True, 1, feedback
+
+        else:
+
+            feedback = f"❌ Wrong! Answer was {answer}"
+            print(feedback)
+
+            return False, 0, feedback
+
+    except ValueError:
+
+        feedback = "Please enter a whole number."
+        print(feedback)
+
+        return False, 0, feedback
 
 
 # Main Routine
 
-def check_answer(num1, num2, question):
-    """Asks math question and checks answer"""
+print("➕ Welcome to the Maths Quiz ➕\n")
 
-    symbols = {
-        "addition": "+",
-        "subtraction": "-",
-        "multiplication": "*",
-        "division": "/"
-    }
-
-    # Work out correct answer
-    if question == "addition":
-        correct = num1 + num2
-    elif question == "subtraction":
-        correct = num1 - num2
-    elif question == "multiplication":
-        correct = num1 * num2
-    elif question == "division":
-        if num2 == 0:
-            print("Cannot divide by zero")
-            return
-        correct = num1 / num2
-
-    # Ask question
-    user_input = input(f"What is {num1} {symbols[question]} {num2}? ")
-
-    # Check answer
-    try:
-        if float(user_input) == correct:
-            print("Correct!")
-        else:
-            print(f"Wrong! The answer was {correct}")
-    except ValueError:
-        print("Please enter a number.")
-
-
-# Main program
-
-valid_operations = ("addition", "subtraction", "multiplication", "division")
-
-num1 = 10
-num2 = 5
-
-function = string_checker(
-    "Choose: Addition (a), Subtraction (s), Multiplication (m), Division (d): ",
-    valid_operations
+want_instructions = yes_no(
+    "Do you want to read the instructions? "
 )
 
-check_answer(num1, num2, function)
+if want_instructions == "yes":
+    instructions()
+
+# Choose maths type
+operation = choose_question()
+
+# Ask rounds
+num_rounds = int_check(
+    "\nHow many rounds would you like?\n"
+    "Press <enter> for infinite mode: "
+)
+
+# Variables
+mode = "regular"
+rounds_played = 0
+score = 0
+
+game_history = []
+
+# Exit if needed
+if num_rounds == "exit":
+
+    print("\nGame exited.")
+
+else:
+
+    # Infinite mode
+    if num_rounds == "infinite":
+
+        mode = "infinite"
+        num_rounds = 5
+
+    # Game loop
+    while rounds_played < num_rounds:
+
+        # Heading
+        if mode == "infinite":
+
+            heading = (
+                f"\n♾ Round {rounds_played + 1} "
+                f"(Infinite Mode) ♾"
+            )
+
+        else:
+
+            heading = (
+                f"\n⭐ Round {rounds_played + 1} "
+                f"of {num_rounds} ⭐"
+            )
+
+        print(heading)
+
+        # Ask question
+        result, points, feedback = ask_question(operation)
+
+        # Exit game
+        if result == "exit":
+            break
+
+        # Update score
+        score += points
+        rounds_played += 1
+
+        # Save history
+        history_item = (
+            f"Round {rounds_played}: {feedback}"
+        )
+
+        game_history.append(history_item)
+
+        # Infinite mode increases rounds
+        if mode == "infinite":
+            num_rounds += 1
+
+    # End game
+    print("\n🏁 Game Over 🏁")
+
+    # Statistics
+    if rounds_played > 0:
+
+        percentage = (score / rounds_played) * 100
+
+        print("\n📊 Statistics 📊")
+        print(f"Score: {score}/{rounds_played}")
+        print(f"Accuracy: {percentage:.1f}%")
+
+        # Ask for history
+        see_history = yes_no(
+            "\nDo you want to see game history? "
+        )
+
+        if see_history == "yes":
+
+            print("\n📜 Game History 📜")
+
+            for item in game_history:
+                print(item)
+
+    else:
+
+        print(
+            "😯 Oops - you did not play any rounds."
+        )

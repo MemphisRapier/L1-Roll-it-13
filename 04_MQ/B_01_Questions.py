@@ -1,5 +1,7 @@
-
 import random
+
+
+# Asks random maths question
 def ask_question():
 
     # Random numbers

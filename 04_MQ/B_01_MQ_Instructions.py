@@ -7,7 +7,6 @@ def yes_no(question):
 
     while True:
 
-        want_instructions = input(question).lower()
 
         if want_instructions == "yes" or want_instructions == "y":
             return "yes"
@@ -18,16 +17,29 @@ def yes_no(question):
 
 def instructions():
 
-    print(''' 
-    
-    There will math questions displayed on this quiz
-    all on basic facts. 
-    
-    These could be simple basic facts like: Multiplication,
-    Division, Addition, Subtraction.
-     
-     Take in mind that none of these questions will have
-      a negative number so don't worry 🙂🙂 ''')
+    print('''
+
+📘 Instructions 📘
+
+There will be maths questions displayed in this quiz
+based on basic maths facts.
+
+The questions may include:
+➕ Addition
+➖ Subtraction
+✖ Multiplication
+➗ Division
+
+None of the questions will contain negative numbers,
+so don't worry 🙂🙂
+
+Type 'xxx' anytime to quit the game.
+
+Good luck!
+''')
+
+
+
 
 #Main Routine Starts here
 
@@ -41,6 +53,4 @@ want_instructions = yes_no("Do you want to read the instructions? ")
 # checks users enter yes (y) or no (n)
 if  want_instructions == "yes":
          instructions()
-
-print("program continues")
 
